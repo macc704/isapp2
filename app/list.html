@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../osql.js"></script>
+
+    <script>
+        osql.requireLogin();
+
+        $(document).ready(function () {
+            execSelect();
+        });
+
+        async function execSelect() {
+            var sql = 'select * from Users';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + '<table border="1">';
+            for (var i = 0; i < objects.length; i++) {
+                html = html + '<tr>';
+                var object = objects[i];
+                html = html + '<td>' + object.id + '</td>';
+                html = html + '<td>' + object.name + '</td>';
+                html = html + '<td>' + '<a href="update.html?userid=' + object.id + '">変更</a>' + '</td>';
+                html = html + '</tr>';
+            }
+            html = html + '</table>';
+            document.getElementById('result').innerHTML = html;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Users</h1>
+    <p id="result">xxxx</p>
+</body>
+
+</html>

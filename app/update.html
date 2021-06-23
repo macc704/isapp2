@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../osql.js"></script>
+
+    <script>
+        osql.requireLogin();
+
+        $().ready(function () {
+            execSelect();
+        });
+
+        async function execSelect() {
+            var userid = osql.getParam('userid');
+            var sql = `select * from Users where id="${userid}";`;
+            var objects = await osql.connect(sql);
+            if (objects.length <= 0) {
+                document.getElementById('result').innerHTML = 'not found';
+                return;
+            }
+            var user = objects[0];
+            document.getElementById('tf1').value = user.id;
+            document.getElementById('tf2').value = user.password;
+            document.getElementById('tf3').value = user.name;
+        }
+
+        function button2Pressed() {
+            execUpdate();
+        }
+
+        async function execUpdate() {
+            var userid = document.getElementById('tf1').value;
+            var password = document.getElementById('tf2').value;
+            var username = document.getElementById('tf3').value;
+
+            var sql = `update Users set name="${username}", password="${password}" where id="${userid}";`;
+            var objects = await osql.connect(sql);
+
+            document.getElementById('result').innerHTML = 'OK';
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>User変更</h1>
+    userid:<input id="tf1" value="" type="textfield" disabled>
+    <br>
+    password:<input id="tf2" value="" type="password">
+    <br>
+    name:<input id="tf3" value="" type="textfield">
+    <button onclick="button2Pressed()">変更</button>
+
+    <p id="result"></p>
+</body>
+
+</html>
