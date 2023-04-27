@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
+
+    <script>
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
+
+        var x;
+
+        $().ready(function () {
+            x = 0;
+            setInterval(doCount, 1000);
+        });
+
+        async function doCount() {
+            x++;
+            document.getElementById('result').innerHTML = x;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <hr>
+    <p id="result">xxxx</p>
+</body>
+
+</html>

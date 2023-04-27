@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
+
+    <script>
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
+
+        function buttonPressed() {
+            var links = ['https://www.google.com', 'https://www.yahoo.co.jp', 'https://www.si.aoyama.ac.jp'];
+
+            var html = '';
+            html = html + '<ul>';
+            for (var i = 0; i < links.length; i++) {
+                html = html + '<li>';
+                html = html + `<a href="${links[i]}">${links[i]}</a>`;
+                html = html + '</li>';
+            }
+            html = html + '</ul>';
+            document.getElementById('links').innerHTML = html;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>画面遷移(4)　プログラムでリンクを作る例</h1>
+    <button onclick="buttonPressed()">X</button>
+    <div id="links">
+</body>
+
+</html>

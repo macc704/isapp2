@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
+
+    <script>
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
+
+        function button1Pressed() {
+            execInsert();
+        }
+
+        async function execInsert() {
+            var userid = document.getElementById('tf1').value;
+            var password = document.getElementById('tf2').value;
+            var username = document.getElementById('tf3').value;
+
+            var sql = `insert into Users (id, password, name) values("${userid}", "${password}", "${username}");`;
+            var objects = await osql.connect(sql);
+            console.log(objects);
+
+            document.getElementById('result').innerHTML = 'OK';
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>User登録</h1>
+    userid:<input id="tf1" value="" type="textfield">
+    <br>
+    password:<input id="tf2" value="" type="password">(公開されますので真面目なパスワードは入れないでください．)
+    <br>
+    name:<input id="tf3" value="" type="textfield">
+    <button onclick="button1Pressed()">登録</button>
+    <br>
+    <p id="result"></p>
+</body>
+
+</html>

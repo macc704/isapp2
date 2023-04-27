@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
+
+    <script>
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
+
+        function buttonPressed() {
+            var x = Math.floor(Math.random() * 2);
+            if (x == 0) {
+                location.href = 'https://www.google.com';
+            } else {
+                location.href = 'https://www.yahoo.co.jp';
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>画面遷移(3)　プログラムで遷移先を変える例</h1>
+    <input type="button" value="ボタン" onclick="buttonPressed();">
+</body>
+
+</html>

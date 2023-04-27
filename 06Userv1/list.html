@@ -5,11 +5,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <script type="text/javascript" src="lib/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/osql.js"></script>
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
 
     <script>
-        osql.requireLogin();
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
 
         $(document).ready(function () {
             execSelect();
@@ -25,8 +25,8 @@
                 html = html + '<tr>';
                 var object = objects[i];
                 html = html + '<td>' + object.id + '</td>';
+                html = html + '<td>' + object.password + '</td>';
                 html = html + '<td>' + object.name + '</td>';
-                html = html + '<td>' + '<a href="update.html?userid=' + object.id + '">変更</a>' + '</td>';
                 html = html + '</tr>';
             }
             html = html + '</table>';
